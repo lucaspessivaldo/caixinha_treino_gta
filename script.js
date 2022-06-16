@@ -14,6 +14,9 @@ const good_result = document.querySelector('.good_result')
 const containerChallenge = document.querySelector('.container_challenge')
 const progBar = document.querySelector('.current_bar')
 
+const wrongMoveSound = new Audio('./sound/sound_wrong_move_sound.mp3');
+wrongMoveSound.volume = 0.70
+
 window.addEventListener('keydown', handleEventKey)
 buttonStart.addEventListener('click', startStopGame)
 
@@ -142,6 +145,7 @@ function handleEventKey(event) {
       }
     }
     else {
+      wrongMoveSound.play()
       currentPositionTyping = 0
       allInputKeys.forEach(key => key.input.classList.remove('key-input-right'))
       userInput.length = 0
@@ -156,6 +160,7 @@ function handleEventKey(event) {
 
   else {
     if (isStart) {
+      wrongMoveSound.play()
       currentPositionTyping = 0
       allInputKeys.forEach(key => key.input.classList.remove('key-input-right'))
       userInput.length = 0
