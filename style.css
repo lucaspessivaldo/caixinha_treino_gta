@@ -157,6 +157,13 @@ body {
   box-shadow: rgb(41, 245, 0) 0px 20px 30px -10px;
 }
 
+.links {
+  margin-top: 6rem;
+  display: flex;
+  gap: 1rem;
+}
+
+
 @media (max-width: 620px) {
   .container_challenge {
     width: 95%;
