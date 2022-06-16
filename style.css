@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+*,
+*:after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+  background-color: rgb(29, 29, 29);
+}
+
+.container_challenge {
+  width: 60rem;
+  height: 20rem;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.452);
+  background-color: rgba(39, 39, 39, 0.884);
+  border-radius: 1.3rem;
+
+  display: grid;
+  grid-template-rows: 18% 1fr;
+}
+
+.container_challenge_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 255, 255, 0.74);
+  font-weight: bold;
+  font-size: 1.5em;
+  font-family: 'Montserrat', sans-serif;
+
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.452);
+}
+
+.container_challenge_code-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.progressive_bar {
+  width: 90%;
+  height: 1rem;
+  overflow: hidden;
+  background-color: #64626e;
+  border-radius: 2rem;
+}
+
+.current_bar {
+  width: 100%;
+  height: 100%;
+  background-color: #a3ef52;
+  transition: background-color 1s,
+}
+
+.input_row {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-content: center;
+
+  gap: 0.9rem;
+  height: 100px;
+  width: 90%;
+
+}
+
+.key-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  aspect-ratio: 1;
+  background-color: white;
+  border: 1px solid rgb(68, 68, 68);
+
+  font-size: 2em;
+}
+
+.key-input-right {
+  background-color: #64626e;
+  color: #464646;
+  opacity: 0.5;
+}
+
+.button-start {
+  width: 15rem;
+  height: 5rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: white;
+  background-color: #74a73f;
+}
+
+.button-start:hover {
+  background-color: #7fbd3d;
+}
+
+.button-stop {
+  width: 15rem;
+  height: 5rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: white;
+  background-color: #b83131;
+}
+
+.button-stop:hover {
+  background-color: #972424;
+}
+
+.bad_result {
+  display: none;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-size: 2.8rem;
+}
+
+.good_result {
+  display: none;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-size: 2.8rem;
+}
+
+.active {
+  box-shadow: rgb(41, 245, 0) 0px 20px 30px -10px;
+}
+
+@media (max-width: 620px) {
+  .container_challenge {
+    width: 95%;
+    height: 20rem;
+  }
+}
