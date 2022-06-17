@@ -118,6 +118,10 @@ function resetChallenge() {
 
 function handleEventKey(event) {
   const letterInput = event.key.toUpperCase()
+  if (event.key === 'Enter') {
+    console.log('right')
+    return startStopGame()
+  }
 
   if (isStart && LETTERS.includes(letterInput) && userInput.length < 8) {
     userInput.push(letterInput)
