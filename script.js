@@ -15,7 +15,9 @@ const containerChallenge = document.querySelector('.container_challenge')
 const progBar = document.querySelector('.current_bar')
 
 const wrongMoveSound = new Audio('./sound/sound_wrong_move_sound.mp3');
+const keyPressSound = new Audio('./sound/key_press_sound.mp3')
 wrongMoveSound.volume = 0.70
+keyPressSound.volume = 0.40
 
 window.addEventListener('keydown', handleEventKey)
 buttonStart.addEventListener('click', startStopGame)
@@ -118,15 +120,18 @@ function resetChallenge() {
 
 function handleEventKey(event) {
   const letterInput = event.key.toUpperCase()
-  if (event.key === 'Enter') {
+
+  if (letterInput === 'ENTER') {
     console.log('right')
-    return startStopGame()
+    startStopGame()
+    return
   }
 
   if (isStart && LETTERS.includes(letterInput) && userInput.length < 8) {
     userInput.push(letterInput)
 
     if (userInput.every((e, i) => e === currentSequence[i])) {
+      keyPressSound.play()
       allInputKeys[currentPositionTyping].input.classList.add('key-input-right')
       currentPositionTyping++
       if (userInput.length === 8) {
