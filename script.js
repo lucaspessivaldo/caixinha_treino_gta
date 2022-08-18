@@ -122,8 +122,8 @@ function handleEventKey(event) {
   const letterInput = event.key.toUpperCase()
 
   if (letterInput === 'ENTER') {
-    console.log('right')
     startStopGame()
+    console.log('right')
     return
   }
 
