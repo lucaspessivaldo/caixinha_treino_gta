@@ -1,20 +1,12 @@
-const allInputKeys = [
-  { input: document.querySelector('.input1') },
-  { input: document.querySelector('.input2') },
-  { input: document.querySelector('.input3') },
-  { input: document.querySelector('.input4') },
-  { input: document.querySelector('.input5') },
-  { input: document.querySelector('.input6') },
-  { input: document.querySelector('.input7') },
-  { input: document.querySelector('.input8') },
-]
+const inputKeys = document.querySelectorAll('.key-input')
+
 const buttonStart = document.querySelector('button')
 const badResult = document.querySelector('.bad_result')
 const good_result = document.querySelector('.good_result')
 const containerChallenge = document.querySelector('.container_challenge')
 const progBar = document.querySelector('.current_bar')
 
-const wrongMoveSound = new Audio('./sound/sound_wrong_move_sound.mp3');
+const wrongMoveSound = new Audio('./sound/wrong_sound.mp3');
 const keyPressSound = new Audio('./sound/key_press_sound.mp3')
 wrongMoveSound.volume = 0.70
 keyPressSound.volume = 0.40
@@ -46,11 +38,11 @@ function timerBar() {
       currentSequence.length = 0 //empty array
       userInput.length = 0 //empty array
       resetChallenge()
-      allInputKeys.forEach(key => key.input.classList.remove('key-input-right'))
+      inputKeys.forEach(key => key.classList.remove('key-input-right'))
 
       //Empty the key display
-      allInputKeys.forEach((key, index) => {
-        key.input.textContent = ''
+      inputKeys.forEach((key, index) => {
+        key.textContent = ''
       })
     }
     if (currentProgBar > 30 && currentProgBar < 60) {
@@ -85,10 +77,11 @@ function startStopGame() {
     currentSequence.push(...getCodeSequence())
     resetChallenge()
     timerBar()
+    inputKeys[0].classList.add('current_key')
 
     //Fill the key display
-    allInputKeys.forEach((key, index) => {
-      key.input.textContent = currentSequence[index]
+    inputKeys.forEach((key, index) => {
+      key.textContent = currentSequence[index]
     })
   }
 
@@ -96,11 +89,11 @@ function startStopGame() {
     currentSequence.length = 0 //empty array
     userInput.length = 0 //empty array
     resetChallenge()
-    allInputKeys.forEach(key => key.input.classList.remove('key-input-right'))
+    inputKeys.forEach(key => key.classList.remove('key-input-right'))
 
     //Empty the key display
-    allInputKeys.forEach((key, index) => {
-      key.input.textContent = ''
+    inputKeys.forEach((key, index) => {
+      key.textContent = ''
     })
   }
 
@@ -116,23 +109,27 @@ function resetChallenge() {
   progBar.style.width = '100%'
   currentPositionTyping = 0
   clearInterval(timerId)
+  inputKeys.forEach(e => e.classList.remove('current_key'))
 }
 
 function handleEventKey(event) {
   const letterInput = event.key.toUpperCase()
 
-  if (letterInput === 'ENTER') {
-    startStopGame()
-    console.log('right')
-    return
-  }
 
   if (isStart && LETTERS.includes(letterInput) && userInput.length < 8) {
     userInput.push(letterInput)
 
+    inputKeys.forEach((e, i) => {
+      if (i - 1 === currentPositionTyping) {
+        e.classList.add('current_key')
+      } else {
+        e.classList.remove('current_key')
+      }
+    })
+
     if (userInput.every((e, i) => e === currentSequence[i])) {
       keyPressSound.play()
-      allInputKeys[currentPositionTyping].input.classList.add('key-input-right')
+      inputKeys[currentPositionTyping].classList.add('key-input-right')
       currentPositionTyping++
       if (userInput.length === 8) {
         clearInterval(timerId)
@@ -145,24 +142,26 @@ function handleEventKey(event) {
         currentSequence.length = 0 //empty array
         userInput.length = 0 //empty array
         resetChallenge()
-        allInputKeys.forEach(key => key.input.classList.remove('key-input-right'))
+        inputKeys.forEach(key => key.classList.remove('key-input-right'))
 
         //Empty the key display
-        allInputKeys.forEach((key, index) => {
-          key.input.textContent = ''
+        inputKeys.forEach((key, index) => {
+          key.textContent = ''
         })
       }
     }
     else {
       wrongMoveSound.play()
       currentPositionTyping = 0
-      allInputKeys.forEach(key => key.input.classList.remove('key-input-right'))
+      inputKeys.forEach(key => key.classList.remove('key-input-right'))
+      inputKeys.forEach(key => key.classList.remove('current_key'))
+      inputKeys[0].classList.add('current_key')
       userInput.length = 0
       currentSequence.length = 0;
 
       currentSequence.push(...getCodeSequence()) //get a new sequence
-      allInputKeys.forEach((key, index) => {
-        key.input.textContent = currentSequence[index]
+      inputKeys.forEach((key, index) => {
+        key.textContent = currentSequence[index]
       })
     }
   }
@@ -171,15 +170,16 @@ function handleEventKey(event) {
     if (isStart) {
       wrongMoveSound.play()
       currentPositionTyping = 0
-      allInputKeys.forEach(key => key.input.classList.remove('key-input-right'))
+      inputKeys.forEach(key => key.classList.remove('key-input-right'))
       userInput.length = 0
       currentSequence.length = 0;
 
       currentSequence.push(...getCodeSequence()) //get a new sequence
-      allInputKeys.forEach((key, index) => {
-        key.input.textContent = currentSequence[index]
+      inputKeys.forEach((key, index) => {
+        key.textContent = currentSequence[index]
       })
     }
   }
 
 }
+

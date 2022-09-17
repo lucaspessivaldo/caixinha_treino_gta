@@ -163,6 +163,12 @@ body {
   gap: 1rem;
 }
 
+.current_key {
+  position: relative;
+  border: #74a73f 3px solid;
+  bottom: 1rem
+}
+
 
 @media (max-width: 620px) {
   .container_challenge {
